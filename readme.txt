@@ -1,5 +1,0 @@
-Installation:
-	
-	
-
-Creating syslinks:
