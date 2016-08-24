@@ -13,8 +13,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Bundle 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'taglist.vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Bundle 'AutoClose'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -61,11 +65,16 @@ colorscheme solarized
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = '^'
-" " set quick-key to toggle NERDTree
+" " set hotkey to toggle NERDTree
 " " This is temp. set to deisabled due to
 " " the vim-multiple-cursors plugin.
-" map <C-n> :NERDTreeToggle<CR>
+map <F9> :NERDTreeToggle<CR>
 
+" -----------
+" set taglist
+" -----------
+" " set hotkey to toggle taglist
+map <leader>t :Tlist<CR>
 
 " >>>>>>>>>>>>>>>>>>>>>
 " vim built-in settings
@@ -83,3 +92,11 @@ set smartindent
 set showcmd
 " " show match ()'s
 set showmatch
+" " show cursor's line
+set cursorline 
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+" vim built-in function mapping
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+" " Ctrl-w [ and Ctrl-w ] to move around buffer
+map <C-w>[ :bprev<CR>
+map <C-w>] :bnext<CR>
