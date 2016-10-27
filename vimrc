@@ -19,6 +19,16 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Bundle 'AutoClose'
+Plugin 'Yggdroot/indentLine'
+Plugin 'mileszs/ack.vim'
+Plugin 'justinj/vim-pico8-syntax'
+Plugin 'scrooloose/syntastic'
+Plugin 'magic-dot-files/TagHighlight'
+Bundle "myusuf3/numbers.vim"
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-commentary'
+Plugin 'bufexplorer.zip'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -55,7 +65,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 syntax enable
 set background=dark
 set t_Co=16
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 colorscheme solarized
 
 " ------------
@@ -75,6 +85,34 @@ map <F9> :NERDTreeToggle<CR>
 " -----------
 " " set hotkey to toggle taglist
 map <leader>t :Tlist<CR>
+" -----------
+" set tagbar
+" -----------
+nmap <F8> :TagbarToggle<CR>
+" ----------
+" set IndentLine
+" --------------
+" " set indentline color
+let g:indentLine_color_term = 246
+" " set hotkey
+nmap <leader>i :IndentLinesToggle<CR>
+" -----------
+" set synastic
+" -----------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" ------------
+" set numbers
+" ------------
+let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree']
+nnoremap <F3> :NumbersToggle<CR>
+nnoremap <F4> :NumbersOnOff<CR>
 
 " >>>>>>>>>>>>>>>>>>>>>
 " vim built-in settings
@@ -94,9 +132,11 @@ set showcmd
 set showmatch
 " " show cursor's line
 set cursorline 
-" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-" vim built-in function mapping
-" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 " " Ctrl-w [ and Ctrl-w ] to move around buffer
 map <C-w>[ :bprev<CR>
 map <C-w>] :bnext<CR>
+" " display non-character
+nmap <leader>l :set list!<CR>
+" " set non-character chars display
+set listchars=tab:>\ ,eol:¬
