@@ -1,17 +1,20 @@
+set nocompatible
+""set term=builtin_ansi
+set t_Co=256
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
 " Vundle - vim plugin manager
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
-set nocompatible              " be iMproved, required
+" "set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Bundle 'altercation/vim-colors-solarized'
+" "Bundle 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Bundle 'taglist.vim'
@@ -29,6 +32,10 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-commentary'
 Plugin 'bufexplorer.zip'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'Valloric/YouCompleteMe'
+""Plugin 'derekwyatt/vim-scala'
+""Plugin 'smancill/conky-syntax.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -60,13 +67,16 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " -------------
-" set solarized
+" Color theme settings
 " -------------
-syntax enable
-set background=dark
-set t_Co=16
-" let g:solarized_termcolors=256
-colorscheme solarized
+" "syntax enable
+" "set background=dark
+""let g:solarized_termcolors=256
+""colorscheme solarized
+colorscheme 256-jungle
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+" "highlight Normal ctermfg=grey ctermbg=black
 
 " ------------
 " set NERDTree
@@ -79,16 +89,17 @@ let g:NERDTreeDirArrowCollapsible = '^'
 " " This is temp. set to deisabled due to
 " " the vim-multiple-cursors plugin.
 map <F9> :NERDTreeToggle<CR>
-
+map <leader>n :NERDTreeToggle<CR>
 " -----------
 " set taglist
 " -----------
 " " set hotkey to toggle taglist
-map <leader>t :Tlist<CR>
+""map <leader>t :Tlist<CR>
 " -----------
 " set tagbar
 " -----------
 nmap <F8> :TagbarToggle<CR>
+map <leader>t :TagbarToggle<CR>
 " ----------
 " set IndentLine
 " --------------
@@ -102,6 +113,10 @@ nmap <leader>i :IndentLinesToggle<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" -----------
+" set CtrlP
+" -----------
+map <C-p> :CtrlP
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -114,24 +129,38 @@ let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3
 nnoremap <F3> :NumbersToggle<CR>
 nnoremap <F4> :NumbersOnOff<CR>
 
+" -----------
+" set YouCompleteMe
+" -----------
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+" -----------
+" set cursor type, only work in xfce4 terminal
+" -----------
+" -----------
+" set cursor type
+" -----------
 " >>>>>>>>>>>>>>>>>>>>>
 " vim built-in settings
 " >>>>>>>>>>>>>>>>>>>>>
 " " display line numbers
 set nu
+" tab-space problems
 " " set tab = 4-space wide
 set tabstop=4
 set softtabstop=4
+set shiftwidth=4
+set expandtab
+
 " " set auto-indent
 set autoindent
-" " set smartindent
-set smartindent
 " " show command on status bar
 set showcmd
 " " show match ()'s
 set showmatch
 " " show cursor's line
-set cursorline 
+set cursorline
+autocmd InsertEnter,InsertLeave * set cul!
 
 " " Ctrl-w [ and Ctrl-w ] to move around buffer
 map <C-w>[ :bprev<CR>
