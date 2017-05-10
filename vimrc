@@ -2,57 +2,58 @@ set nocompatible
 ""set term=builtin_ansi
 set t_Co=256
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
-" Vundle - vim plugin manager
+" vim-plug plugin manager
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
-" "set nocompatible              " be iMproved, required
-filetype off                  " required
+" changed from vundle to vim-plug
+" but the plugin path is stayed as ~/.vim/bundle
+"
+" Install script
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py
+  endif
+endfunction
+call plug#begin('~/.vim/bundle')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree',  { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'Yggdroot/indentLine'
+Plug 'mileszs/ack.vim'
+Plug 'justinj/vim-pico8-syntax'
+Plug 'scrooloose/syntastic'
+Plug 'magic-dot-files/TagHighlight'
+Plug 'myusuf3/numbers.vim'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-commentary'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'derekwyatt/vim-scala'
+Plug 'mbbill/undotree'
+Plug 'gregsexton/gitv', {'on': ['Gitv']}
+call plug#end()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" "Bundle 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Bundle 'taglist.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Bundle 'AutoClose'
-Plugin 'Yggdroot/indentLine'
-Plugin 'mileszs/ack.vim'
-Plugin 'justinj/vim-pico8-syntax'
-Plugin 'scrooloose/syntastic'
-Plugin 'magic-dot-files/TagHighlight'
-Bundle "myusuf3/numbers.vim"
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-commentary'
-Plugin 'bufexplorer.zip'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'Valloric/YouCompleteMe'
-""Plugin 'derekwyatt/vim-scala'
-""Plugin 'smancill/conky-syntax.vim'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " Put your non-Plugin stuff after this line
+" vim-plug help
+" PlugInstall [name ...] [#threads]     Install plugins
+" PlugUpdate [name ...] [#threads]  Install or update plugins
+" PlugClean[!]  Remove unused directories (bang version will clean without
+" prompt)
+" PlugUpgrade   Upgrade vim-plug itself
+" PlugStatus    Check the status of plugins
+" PlugDiff  Examine changes from the previous update and the pending changes
+" PlugSnapshot[!] [output path]     Generate script for restoring the current
+" snapshot of the plugins
 
 " ---------------
-" set status line
+" set vim-airline
 " ---------------
 set laststatus=2
 " " enable powerline-fonts
@@ -65,6 +66,8 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 " " show buffer number
 let g:airline#extensions#tabline#buffer_nr_show = 1
+" " use with tagbar plugin
+let g:airline#extensions#tagbar#enabled = 1
 
 " -------------
 " Color theme settings
@@ -83,18 +86,15 @@ highlight nonText ctermbg=NONE
 " ------------
 " " set arrows on NERDTree
 let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '>'
-let g:NERDTreeDirArrowCollapsible = '^'
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
 " " set hotkey to toggle NERDTree
 " " This is temp. set to deisabled due to
 " " the vim-multiple-cursors plugin.
 map <F9> :NERDTreeToggle<CR>
 map <leader>n :NERDTreeToggle<CR>
-" -----------
-" set taglist
-" -----------
-" " set hotkey to toggle taglist
-""map <leader>t :Tlist<CR>
+
 " -----------
 " set tagbar
 " -----------
@@ -125,9 +125,9 @@ let g:syntastic_check_on_wq = 0
 " ------------
 " set numbers
 " ------------
-let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree']
-nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NumbersOnOff<CR>
+let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree', 'undo', 'diff']
+nnoremap <leader>3 :NumbersToggle<CR>
+nnoremap <leader>4 :NumbersOnOff<CR>
 
 " -----------
 " set YouCompleteMe
@@ -135,16 +135,19 @@ nnoremap <F4> :NumbersOnOff<CR>
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " -----------
-" set cursor type, only work in xfce4 terminal
+" set undotree
 " -----------
-" -----------
-" set cursor type
-" -----------
+map <C-u> :UndotreeToggle<CR>
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+
 " >>>>>>>>>>>>>>>>>>>>>
 " vim built-in settings
 " >>>>>>>>>>>>>>>>>>>>>
 " " display line numbers
-set nu
+set number
 " tab-space problems
 " " set tab = 4-space wide
 set tabstop=4
