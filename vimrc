@@ -76,7 +76,7 @@ let g:airline#extensions#tagbar#enabled = 1
 " "set background=dark
 ""let g:solarized_termcolors=256
 ""colorscheme solarized
-colorscheme 256-jungle
+colorscheme bob1996w-jungle
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 " "highlight Normal ctermfg=grey ctermbg=black
