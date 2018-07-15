@@ -1,0 +1,4 @@
+# ignore the installed plugins
+plugged/
+# ignore file history
+.netrwhist

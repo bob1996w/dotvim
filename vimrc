@@ -17,10 +17,12 @@ function! BuildYCM(info)
     !./install.py
   endif
 endfunction
-call plug#begin('~/.vim/bundle')
+
+call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree',  { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'terryma/vim-multiple-cursors'
@@ -39,6 +41,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'derekwyatt/vim-scala'
 Plug 'mbbill/undotree'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " vim-plug help
@@ -72,13 +75,15 @@ let g:airline#extensions#tagbar#enabled = 1
 " -------------
 " Color theme settings
 " -------------
-" "syntax enable
-" "set background=dark
+syntax enable
+set background=dark
 ""let g:solarized_termcolors=256
-""colorscheme solarized
-colorscheme bob1996w-jungle
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
+colorscheme solarized
+
+" --- for custom theme
+"colorscheme bob1996w-jungle
+"highlight Normal ctermbg=NONE
+"highlight nonText ctermbg=NONE
 " "highlight Normal ctermfg=grey ctermbg=black
 
 " ------------
@@ -137,7 +142,7 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 " -----------
 " set undotree
 " -----------
-map <C-u> :UndotreeToggle<CR>
+map <C-w>u :UndotreeToggle<CR>
 if has("persistent_undo")
     set undodir=~/.undodir/
     set undofile
