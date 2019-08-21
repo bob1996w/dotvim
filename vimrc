@@ -3,6 +3,7 @@
 " >>>>>>>>>>
 set nocompatible
 set t_Co=256
+language en_US.UTF-8
 
 " >>>>>>>>>>>>>>>>>>>>>
 " vim built-in settings
@@ -37,24 +38,13 @@ map <C-w>] :bnext<CR>
 nmap <leader>l :set list!<CR>
 
 " " set non-character chars display
-set listchars=tab:>\ ,eol:¬
+" set listchars=tab:>\ ,eol:¬
 
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
 " vim-plug plugin manager
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
 " changed from vundle to vim-plug
 " but the plugin path is stayed as ~/.vim/bundle
-"
-" Install script
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py
-  endif
-endfunction
 
 call plug#begin('~/.vim/plugged')
 
@@ -75,12 +65,12 @@ Plug 'myusuf3/numbers.vim'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'mbbill/undotree'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', {'dir':'~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " vim-plug help
@@ -148,9 +138,9 @@ map <leader>t :TagbarToggle<CR>
 " set IndentLine
 " --------------
 " " set indentline color
-let g:indentLine_color_term = 246
+" let g:indentLine_color_term = 246
 " " set hotkey
-nmap <leader>i :IndentLinesToggle<CR>
+" nmap <leader>i :IndentLinesToggle<CR>
 " -----------
 " set synastic
 " -----------
@@ -172,11 +162,6 @@ let g:syntastic_check_on_wq = 0
 let g:numbers_exclude = ['unite', 'tagbar', 'startify', 'gundo', 'vimshell', 'w3m', 'nerdtree', 'undo', 'diff']
 nnoremap <leader>3 :NumbersToggle<CR>
 nnoremap <leader>4 :NumbersOnOff<CR>
-
-" -----------
-" set YouCompleteMe
-" -----------
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " -----------
 " set undotree
