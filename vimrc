@@ -1,6 +1,44 @@
+" >>>>>>>>>>
+" Vim common
+" >>>>>>>>>>
 set nocompatible
-""set term=builtin_ansi
 set t_Co=256
+
+" >>>>>>>>>>>>>>>>>>>>>
+" vim built-in settings
+" >>>>>>>>>>>>>>>>>>>>>
+" " display line numbers
+set number
+" tab-space problems
+" " set tab = 4-space wide
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
+" " set auto-indent
+set autoindent
+" " show command on status bar
+set showcmd
+" " show match ()'s
+set showmatch
+" " show cursor's line
+set cursorline
+autocmd InsertEnter,InsertLeave * set cul!
+
+" " the easier to use "esc" key
+inoremap jk <Esc>
+
+" " Ctrl-w [ and Ctrl-w ] to move around buffer
+map <C-w>[ :bprev<CR>
+map <C-w>] :bnext<CR>
+
+" " display non-character
+nmap <leader>l :set list!<CR>
+
+" " set non-character chars display
+set listchars=tab:>\ ,eol:¬
+
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
 " vim-plug plugin manager
 " >>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -38,10 +76,11 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'derekwyatt/vim-scala'
 Plug 'mbbill/undotree'
 Plug 'gregsexton/gitv', {'on': ['Gitv']}
 Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', {'dir':'~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " vim-plug help
@@ -147,33 +186,3 @@ if has("persistent_undo")
     set undodir=~/.undodir/
     set undofile
 endif
-
-" >>>>>>>>>>>>>>>>>>>>>
-" vim built-in settings
-" >>>>>>>>>>>>>>>>>>>>>
-" " display line numbers
-set number
-" tab-space problems
-" " set tab = 4-space wide
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-
-" " set auto-indent
-set autoindent
-" " show command on status bar
-set showcmd
-" " show match ()'s
-set showmatch
-" " show cursor's line
-set cursorline
-autocmd InsertEnter,InsertLeave * set cul!
-
-" " Ctrl-w [ and Ctrl-w ] to move around buffer
-map <C-w>[ :bprev<CR>
-map <C-w>] :bnext<CR>
-" " display non-character
-nmap <leader>l :set list!<CR>
-" " set non-character chars display
-set listchars=tab:>\ ,eol:¬
