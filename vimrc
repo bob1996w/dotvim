@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'joshdick/onedark.vim'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/nerdtree',  { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -106,8 +107,7 @@ let g:airline#extensions#tagbar#enabled = 1
 " -------------
 syntax enable
 set background=dark
-""let g:solarized_termcolors=256
-" colorscheme solarized
+colorscheme onedark
 
 " --- for custom theme
 "colorscheme bob1996w-jungle
