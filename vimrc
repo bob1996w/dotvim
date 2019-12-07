@@ -72,6 +72,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', {'dir':'~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 " vim-plug help
